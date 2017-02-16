@@ -1,0 +1,19 @@
+syntax = "proto3";
+package github.com.Serabe.iaas.iaas;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option go_package = "iaas";
+
+message IncRequest {
+	int64 arg1 = 1;
+}
+
+message IncResponse {
+	int64 result1 = 1;
+}
+
+service IaasService {
+	rpc Inc (github.com.Serabe.iaas.iaas.IncRequest) returns (github.com.Serabe.iaas.iaas.IncResponse);
+}
+
