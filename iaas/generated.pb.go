@@ -38,7 +38,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type IncRequest struct {
-	Arg1 int64 `protobuf:"varint,1,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg1 float64 `protobuf:"fixed64,1,opt,name=arg1,proto3" json:"arg1,omitempty"`
 }
 
 func (m *IncRequest) Reset()                    { *m = IncRequest{} }
@@ -46,7 +46,7 @@ func (m *IncRequest) String() string            { return proto.CompactTextString
 func (*IncRequest) ProtoMessage()               {}
 func (*IncRequest) Descriptor() ([]byte, []int) { return fileDescriptorGenerated, []int{0} }
 
-func (m *IncRequest) GetArg1() int64 {
+func (m *IncRequest) GetArg1() float64 {
 	if m != nil {
 		return m.Arg1
 	}
@@ -54,7 +54,7 @@ func (m *IncRequest) GetArg1() int64 {
 }
 
 type IncResponse struct {
-	Result1 int64 `protobuf:"varint,1,opt,name=result1,proto3" json:"result1,omitempty"`
+	Result1 float64 `protobuf:"fixed64,1,opt,name=result1,proto3" json:"result1,omitempty"`
 }
 
 func (m *IncResponse) Reset()                    { *m = IncResponse{} }
@@ -62,7 +62,7 @@ func (m *IncResponse) String() string            { return proto.CompactTextStrin
 func (*IncResponse) ProtoMessage()               {}
 func (*IncResponse) Descriptor() ([]byte, []int) { return fileDescriptorGenerated, []int{1} }
 
-func (m *IncResponse) GetResult1() int64 {
+func (m *IncResponse) GetResult1() float64 {
 	if m != nil {
 		return m.Result1
 	}
@@ -162,9 +162,9 @@ func (m *IncRequest) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.Arg1 != 0 {
-		dAtA[i] = 0x8
+		dAtA[i] = 0x9
 		i++
-		i = encodeVarintGenerated(dAtA, i, uint64(m.Arg1))
+		i = encodeFixed64Generated(dAtA, i, uint64(math.Float64bits(float64(m.Arg1))))
 	}
 	return i, nil
 }
@@ -185,9 +185,9 @@ func (m *IncResponse) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.Result1 != 0 {
-		dAtA[i] = 0x8
+		dAtA[i] = 0x9
 		i++
-		i = encodeVarintGenerated(dAtA, i, uint64(m.Result1))
+		i = encodeFixed64Generated(dAtA, i, uint64(math.Float64bits(float64(m.Result1))))
 	}
 	return i, nil
 }
@@ -223,7 +223,7 @@ func (m *IncRequest) Size() (n int) {
 	var l int
 	_ = l
 	if m.Arg1 != 0 {
-		n += 1 + sovGenerated(uint64(m.Arg1))
+		n += 9
 	}
 	return n
 }
@@ -232,7 +232,7 @@ func (m *IncResponse) Size() (n int) {
 	var l int
 	_ = l
 	if m.Result1 != 0 {
-		n += 1 + sovGenerated(uint64(m.Result1))
+		n += 9
 	}
 	return n
 }
@@ -280,24 +280,23 @@ func (m *IncRequest) Unmarshal(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 0 {
+			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Arg1", wireType)
 			}
-			m.Arg1 = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowGenerated
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Arg1 |= (int64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
 			}
+			iNdEx += 8
+			v = uint64(dAtA[iNdEx-8])
+			v |= uint64(dAtA[iNdEx-7]) << 8
+			v |= uint64(dAtA[iNdEx-6]) << 16
+			v |= uint64(dAtA[iNdEx-5]) << 24
+			v |= uint64(dAtA[iNdEx-4]) << 32
+			v |= uint64(dAtA[iNdEx-3]) << 40
+			v |= uint64(dAtA[iNdEx-2]) << 48
+			v |= uint64(dAtA[iNdEx-1]) << 56
+			m.Arg1 = float64(math.Float64frombits(v))
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGenerated(dAtA[iNdEx:])
@@ -349,24 +348,23 @@ func (m *IncResponse) Unmarshal(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 0 {
+			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Result1", wireType)
 			}
-			m.Result1 = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowGenerated
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Result1 |= (int64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
 			}
+			iNdEx += 8
+			v = uint64(dAtA[iNdEx-8])
+			v |= uint64(dAtA[iNdEx-7]) << 8
+			v |= uint64(dAtA[iNdEx-6]) << 16
+			v |= uint64(dAtA[iNdEx-5]) << 24
+			v |= uint64(dAtA[iNdEx-4]) << 32
+			v |= uint64(dAtA[iNdEx-3]) << 40
+			v |= uint64(dAtA[iNdEx-2]) << 48
+			v |= uint64(dAtA[iNdEx-1]) << 56
+			m.Result1 = float64(math.Float64frombits(v))
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGenerated(dAtA[iNdEx:])
@@ -506,12 +504,12 @@ var fileDescriptorGenerated = []byte{
 	0xeb, 0x81, 0xd4, 0x81, 0x09, 0x29, 0x5d, 0x24, 0x93, 0xd2, 0xf3, 0xd3, 0xf3, 0x21, 0x16, 0x24,
 	0x95, 0xa6, 0x81, 0x79, 0x60, 0x0e, 0x98, 0x05, 0x31, 0x4b, 0x49, 0x81, 0x8b, 0xcb, 0x33, 0x2f,
 	0x39, 0x28, 0xb5, 0xb0, 0x34, 0xb5, 0xb8, 0x44, 0x48, 0x88, 0x8b, 0x25, 0xb1, 0x28, 0xdd, 0x50,
-	0x82, 0x51, 0x81, 0x51, 0x83, 0x39, 0x08, 0xcc, 0x56, 0x52, 0xe7, 0xe2, 0x06, 0xab, 0x28, 0x2e,
+	0x82, 0x51, 0x81, 0x51, 0x83, 0x31, 0x08, 0xcc, 0x56, 0x52, 0xe7, 0xe2, 0x06, 0xab, 0x28, 0x2e,
 	0xc8, 0xcf, 0x2b, 0x4e, 0x15, 0x92, 0xe0, 0x62, 0x2f, 0x4a, 0x2d, 0x2e, 0xcd, 0x29, 0x81, 0xa9,
 	0x82, 0x71, 0x8d, 0xd2, 0xb9, 0xb8, 0x3d, 0x13, 0x13, 0x8b, 0x83, 0x53, 0x8b, 0xca, 0x32, 0x93,
 	0x53, 0x85, 0x22, 0xb8, 0x98, 0x3d, 0xf3, 0x92, 0x85, 0xd4, 0xf5, 0xf0, 0xb8, 0x56, 0x0f, 0x61,
 	0xb7, 0x94, 0x06, 0x61, 0x85, 0x10, 0x27, 0x38, 0x89, 0x9d, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91,
 	0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x33, 0x1e, 0xcb, 0x31, 0x44, 0xb1, 0x80, 0xd4, 0x24, 0xb1,
-	0x81, 0xbd, 0x64, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x5b, 0x87, 0x8e, 0xdf, 0x70, 0x01, 0x00,
+	0x81, 0xbd, 0x64, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x91, 0x9e, 0xc7, 0x4f, 0x70, 0x01, 0x00,
 	0x00,
 }
