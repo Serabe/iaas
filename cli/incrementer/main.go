@@ -15,7 +15,7 @@ func main() {
 	str := os.Args[len(os.Args)-1]
 	num, err := strconv.ParseInt(str, 10, 64)
 	if err != nil {
-		panic(fmt.Sprintf("%s is not a number, at least for me", str))
+		panic(fmt.Sprintf("%s is not a number, at least for me: %s", str, err))
 	}
 
 	conn, err := grpc.Dial("localhost:5678", grpc.WithInsecure())
@@ -29,5 +29,5 @@ func main() {
 		panic("Oh no, I could not increment your number!")
 	}
 
-	fmt.Printf("%d", result.Result1)
+	fmt.Printf("%d\n", result.Result1)
 }
